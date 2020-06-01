@@ -36,7 +36,7 @@ class ProjectController extends Controller
             'customer' => $dataProjects->customers,
             'member' => $dataProjects->members
         ];
-        return view('members.projects.details')->with('contentProject', $contentProject);
+        return view('members.projects.details', $contentProject);
     }
 
     /**

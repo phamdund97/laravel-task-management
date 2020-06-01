@@ -43,7 +43,7 @@
                                     <div class="info-box bg-light">
                                         <div class="info-box-content">
                                             <span class="info-box-text text-center text-muted">Start Date</span>
-                                            <span class="info-box-number text-center text-muted mb-0">{{ date('H:i d-m-Y', strtotime($contentProject['projectDetail']->begin_at)) }}</span>
+                                            <span class="info-box-number text-center text-muted mb-0">{{ date('H:i d-m-Y', strtotime($projectDetail->begin_at)) }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -51,7 +51,7 @@
                                     <div class="info-box bg-light">
                                         <div class="info-box-content">
                                             <span class="info-box-text text-center text-muted">End Date</span>
-                                            <span class="info-box-number text-center text-muted mb-0">{{ date('H:i d-m-Y', strtotime($contentProject['projectDetail']->finish_at)) }}</span>
+                                            <span class="info-box-number text-center text-muted mb-0">{{ date('H:i d-m-Y', strtotime($projectDetail->finish_at)) }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -59,7 +59,7 @@
                                     <div class="info-box bg-light">
                                         <div class="info-box-content">
                                             <span class="info-box-text text-center text-muted">Process</span>
-                                            <span class="info-box-number text-center text-muted mb-0">{{ $contentProject['process'] }}%</span>
+                                            <span class="info-box-number text-center text-muted mb-0">{{ $process }}%</span>
                                         </div>
                                     </div>
                                 </div>
@@ -72,7 +72,7 @@
                                             <strong>Title Project</strong>
                                         </div>
                                         <p>
-                                            {{ $contentProject['projectDetail']->title }}
+                                            {{ $projectDetail->title }}
                                         </p>
                                     </div>
 
@@ -81,7 +81,7 @@
                                             <strong>Project Description</strong>
                                         </div>
                                         <p>
-                                            {{ $contentProject['projectDetail']->description }}
+                                            {{ $projectDetail->description }}
                                         </p>
                                     </div>
                                 </div>
@@ -92,10 +92,10 @@
                             <br>
                             <div class="text-muted">
                                 <p class="text-sm">Customer
-                                    <b class="d-block">{{ $contentProject['customer']->full_name }}</b>
+                                    <b class="d-block">{{ $customer->full_name }}</b>
                                 </p>
                                 <p class="text-sm">Team members
-                                    @foreach($contentProject['member'] as $value)
+                                    @foreach($member as $value)
                                         @if($value->email != auth()->user()->email)
                                             <b class="d-block mb-2">- &nbsp {{ $value->name }}</b>
                                         @else
@@ -108,7 +108,7 @@
                                 </br>
                                 <p class="text-sm">
                                     <a class="btn btn-primary text-white"
-                                       href="{{ route('tasks.show_task', $contentProject['projectDetail']->id) }}">List of Tasks</a>
+                                       href="{{ route('tasks.show_task', $projectDetail->id) }}">List of Tasks</a>
                                     <a class="btn btn-secondary text-white" href="{{ route('projects.index') }}">Back to Projects</a>
                                 </p>
                             </div>
