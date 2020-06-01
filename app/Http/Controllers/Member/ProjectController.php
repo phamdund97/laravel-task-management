@@ -23,27 +23,38 @@ class ProjectController extends Controller
 
     /**
      * Show details of projects
-     * @param $id
+     * @param $projectId
      * @return Factory|View
      */
-    public function show($id)
+    public function show($projectId)
     {
-        $tasksProject = Project::find($id)->tasks;
-        $numberOfTaskFinished = $tasksProject->where('status', Member::STATUS_CLOSE)->count();
-        $projectDetail = Project::findorFail($id);
-        $customer = Project::find($id)->customers;
-        $member = Project::find($id)->members;
-        if ($tasksProject && $numberOfTaskFinished != null) {
-            $process = number_format(($numberOfTaskFinished / count($tasksProject)) * 100, 1, '.', ',');
-        } else {
-            $process = 0;
-        }
-        $contentProject = array(
+        $dataProjects = Project::findorFail($projectId);
+        $process = $dataProjects->process_data;
+        $contentProject = [
             'process' => $process,
-            'projectDetail' => $projectDetail,
-            'customer' => $customer,
-            'member' => $member
-        );
+            'projectDetail' => $dataProjects,
+            'customer' => $dataProjects->customers,
+            'member' => $dataProjects->members
+        ];
         return view('members.projects.details')->with('contentProject', $contentProject);
+    }
+
+    /**
+     * Show Tasks from id project.
+     * @param $projectId
+     * @return Factory|View
+     */
+    public function showTask($projectId)
+    {
+        $titleProject = Project::findorFail($projectId)->title;
+        $listTask = auth()->user()->tasks()->where('project_id', $projectId)->paginate(config('app.pagination'));
+        $dataTask = [
+            'listTask' => $listTask,
+            'orderId' => Member::ID,
+            'project_id' => $projectId,
+            'paginate' => config('app.pagination'),
+            'titleProject' => $titleProject
+        ];
+        return view('members.tasks.tasks', ['dataTask' => $dataTask]);
     }
 }

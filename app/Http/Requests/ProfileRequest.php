@@ -25,7 +25,7 @@ class ProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'full_name' => 'required|regex:/^[a-zA-Z ]+$/|max:50',
+            'name' => 'required|regex:/^[a-zA-Z ]+$/|max:50',
             'email' => 'required|email',
             'gender' => 'required',
             'phone' => 'required|numeric',
@@ -42,9 +42,9 @@ class ProfileRequest extends FormRequest
     public function messages()
     {
         return [
-            'full_name.required' => 'Full name is required!',
-            'full_name.regex' => 'You must to enter the correct format of name!',
-            'full_name.max' => 'Name is only maximize 50 characters of alphabet!',
+            'name.required' => 'Full name is required!',
+            'name.regex' => 'You must to enter the correct format of name!',
+            'name.max' => 'Name is only maximize 50 characters of alphabet!',
             'email.required' => 'Email is required!',
             'email.email' => 'Format email was not correct!',
             'gender.required' => 'Gender is required!',

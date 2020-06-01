@@ -3,12 +3,21 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class SearchController extends Controller
 {
-    public function index()
+    /**
+     * Search result by key word
+     * @param Request $request
+     * @return Factory|View
+     */
+    public function search(Request $request)
     {
-        return view('layouts.index');
+        $task = auth()->user()->tasks()->where('title', 'like', "%$request->keyword%")
+            ->orWhere('description', 'like', "%$request->keyword%")->paginate(config('app.pagination'));
+        return view('generals.resultSearch', ['data' => $task]);
     }
 }

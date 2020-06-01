@@ -232,6 +232,7 @@ return [
     /*
      * Paginate with 3 units in a page
      */
-    'pagination' => 5,
+    'pagination' => env('PAGINATION', 5),
+    'admin_pagination' => env('ADMIN_PAGINATION', 15),
 
 ];

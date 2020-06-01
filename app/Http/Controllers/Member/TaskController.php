@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
 use App\Models\Member;
+use App\Models\Project;
 use App\Models\Task;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -22,30 +23,20 @@ class TaskController extends Controller
     }
 
     /**
-     * Show Tasks from id project.
-     * @param $id
-     * @return Factory|View
-     */
-    public function show($id)
-    {
-        $listTask = auth()->user()->tasks()->where('project_id', $id)->paginate(config('app.pagination'));
-        $dataTask = [
-            'listTask' => $listTask,
-            'orderId' => Member::ID,
-            'project_id' => $id,
-            'paginate' => config('app.pagination')
-        ];
-        return view('members.tasks.tasks', ['dataTask' => $dataTask]);
-    }
-
-    /**
      * Complete Tasks
      * @param Request $request
      * @return RedirectResponse
      */
     public function update(Request $request)
     {
-        Task::findorFail($request->id)->update(['status' => Member::STATUS_CLOSE]);
-        return redirect()->route('tasks.show', $request->projectId)->with('success', trans('message.task_success'));
+        $task_id = $request->taskId;
+        $project_id = $request->projectId;
+        $taskMember = Task::find($task_id)->member_id;
+        if ($taskMember == auth()->user()->id) {
+            Task::findorFail($task_id)->update(['status' => Member::STATUS_CLOSE]);
+            return redirect()->route('tasks.show_task', $project_id)->with('success', trans('message.task_success'));
+        } else {
+            return redirect()->route('tasks.show_task', $project_id)->with('error', trans('message.task_error'));
+        }
     }
 }

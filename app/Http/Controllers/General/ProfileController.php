@@ -30,7 +30,7 @@ class ProfileController extends Controller
      */
     public function store(ProfileRequest $request)
     {
-        $data = request()->only(['full_name', 'email', 'gender', 'phone', 'address']);
+        $data = request()->only(['name', 'email', 'gender', 'phone', 'address']);
         if ($request->password) {
             $data['password'] = bcrypt($request->password);
         }
