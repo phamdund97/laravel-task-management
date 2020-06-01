@@ -29,14 +29,14 @@ class TaskController extends Controller
      */
     public function update(Request $request)
     {
-        $task_id = $request->taskId;
-        $project_id = $request->projectId;
-        $taskMember = Task::find($task_id)->member_id;
+        $taskMember = Task::find($request->task_id)->member_id;
         if ($taskMember == auth()->user()->id) {
-            Task::findorFail($task_id)->update(['status' => Member::STATUS_CLOSE]);
-            return redirect()->route('tasks.show_task', $project_id)->with('success', trans('message.task_success'));
+            Task::findorFail($request->task_id)->update(['status' => Member::STATUS_CLOSE]);
+            return redirect()->route('tasks.show_task', $request->project_id)
+                ->with('success', trans('message.task_success'));
         } else {
-            return redirect()->route('tasks.show_task', $project_id)->with('error', trans('message.task_error'));
+            return redirect()->route('tasks.show_task', $request->project_id)
+                ->with('error', trans('message.task_error'));
         }
     }
 }

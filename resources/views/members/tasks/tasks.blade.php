@@ -140,10 +140,10 @@
                             </strong>
                         </div>
                     </div>
-                    <form method="GET" action="{{ route('update', ['taskId', 'projectId']) }}">
+                    <form method="GET" action="{{ route('update', ['task_id', 'project_id']) }}">
                         <div class="modal-data">
-                            <input type="text" name="taskId" id="TaskId" value="" hidden/>
-                            <input type="text" name="projectId" id="projects" value="" hidden/>
+                            <input type="text" name="task_id" id="TaskId" value="" hidden/>
+                            <input type="text" name="project_id" id="projects" value="" hidden/>
                         </div>
 
                         <div class="modal-footer">
