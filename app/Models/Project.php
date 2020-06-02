@@ -35,7 +35,7 @@ class Project extends Model
     public function getProcessDataAttribute()
     {
         if ($this->tasksFinished() == null) {
-            return number_format((0 / count($this->tasks)) * 100, 1, '.', ',');
+            return 0;
         } else {
             return number_format($this->tasksFinished() / count($this->tasks) * 100, 1, '.', ',');
         }
