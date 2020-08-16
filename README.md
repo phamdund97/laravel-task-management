@@ -29,10 +29,6 @@ Quickly set up skeleton for your Laravel 7.x app
 9. Browse app: `localhost:8000`
 10. Login using test account: Email: `test@haposoft.com` / Password: `123456789`
 
-## Technical support:
-- [Skype Group](https://join.skype.com/HxHLdORRW2gO)
-- [Facebook Group](https://www.facebook.com/laravelvn/)
-
 ## License
 
 [MIT license](https://opensource.org/licenses/MIT).
